@@ -1,0 +1,11 @@
+.DS_Store
+.clang-format
+.vscode
+CMakeCache.txt
+CMakeFiles
+CMakeLists.txt
+Makefile
+a.out
+cmake_install.cmake
+libmailer.so
+mailer.so
