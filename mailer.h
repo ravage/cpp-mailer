@@ -41,6 +41,7 @@ class Mailer {
     void setOptions();
     long generateRandom();
     std::string dateTimeNow();
+    void cleanup();
 
     public:
 

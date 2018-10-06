@@ -1,6 +1,5 @@
 #include "mailer.h"
 #include <curl/curl.h>
-#include <iostream>
 #include <set>
 #include <sstream>
 #include <random>
@@ -153,21 +152,20 @@ void Mailer::deliver() {
         subjectHeader()
     };
 
-    if (!cc.empty()) {
-
-    }
     curl = curl_easy_init();
+
+    if (curl == NULL) {
+        cleanup();
+        throw std::runtime_error("Failed to initialize libcurl");
+    }
+
     setOptions();
     res = curl_easy_perform(curl);
 
     if(res != CURLE_OK) {
-        std::cerr << curl_easy_strerror(res) << std::endl;
+        cleanup();
+        throw std::runtime_error(curl_easy_strerror(res));
     }
-
-    curl_slist_free_all(recipients);
-    curl_slist_free_all(curlHeaders);
-    curl_easy_cleanup(curl);
-    curl_mime_free(mime);
 }
 
 void Mailer::setOptions() {
@@ -216,4 +214,11 @@ void Mailer::setOptions() {
 
     curl_easy_setopt(curl, CURLOPT_VERBOSE, verbose ? 1L : 0);
     curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+}
+
+void Mailer::cleanup() {
+    curl_slist_free_all(recipients);
+    curl_slist_free_all(curlHeaders);
+    curl_easy_cleanup(curl);
+    curl_mime_free(mime);
 }

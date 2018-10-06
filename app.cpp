@@ -11,8 +11,8 @@ int main() {
         .setVerbose()
         .setTls()
         .setSubject("Subject Text!")
-        .setBody("Body Text");
-    mailer.deliver();
+        .setBody("Body Text")
+        .deliver();
 
     return 0;
 }
