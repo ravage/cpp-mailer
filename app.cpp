@@ -1,4 +1,4 @@
-#include "mailer.h"
+#include "mailer/mailer.h"
 
 int main() {
     Mailer mailer;

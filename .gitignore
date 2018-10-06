@@ -3,9 +3,10 @@
 .vscode
 CMakeCache.txt
 CMakeFiles
-CMakeLists.txt
 Makefile
 a.out
 cmake_install.cmake
 libmailer.so
 mailer.so
+*.dylib
+test_mailer
