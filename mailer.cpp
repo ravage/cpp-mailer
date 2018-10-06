@@ -74,7 +74,7 @@ std::string Mailer::toHeader() {
     std::stringstream result;
     result << "To: ";
 
-    for (auto item : to) {
+    for (const auto& item : to) {
         result << item << ",";
     }
 
@@ -91,7 +91,7 @@ std::string Mailer::ccHeader() {
     std::stringstream result;
     result << "Cc: ";
 
-    for (auto item : cc) {
+    for (const auto& item : cc) {
         result << item << ",";
     }
 
@@ -173,25 +173,26 @@ void Mailer::setOptions() {
     curl_easy_setopt(curl, CURLOPT_PASSWORD, password.c_str());
     curl_easy_setopt(curl, CURLOPT_PORT, port);
     curl_easy_setopt(curl, CURLOPT_URL, server.c_str());
+
     if (tls) {
         curl_easy_setopt(curl, CURLOPT_USE_SSL, (long)CURLUSESSL_ALL);
     }
     curl_easy_setopt(curl, CURLOPT_MAIL_FROM, from.c_str());
 
-    for (const auto item : to) {
+    for (const auto& item : to) {
         recipients = curl_slist_append(recipients, item.c_str());
     }
 
-    for (const auto item : cc) {
+    for (const auto& item : cc) {
         recipients = curl_slist_append(recipients, item.c_str());
     }
 
-    for (const auto item : bcc) {
+    for (const auto& item : bcc) {
         recipients = curl_slist_append(recipients, item.c_str());
     }
     curl_easy_setopt(curl, CURLOPT_MAIL_RCPT, recipients);
 
-    for (const auto item: headers) {
+    for (const auto& item: headers) {
         curlHeaders = curl_slist_append(curlHeaders, item.c_str());
     }
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, curlHeaders);
@@ -219,6 +220,8 @@ void Mailer::setOptions() {
 void Mailer::cleanup() {
     curl_slist_free_all(recipients);
     curl_slist_free_all(curlHeaders);
+    curl_slist_free_all(slist);
     curl_easy_cleanup(curl);
     curl_mime_free(mime);
+    curl_mime_free(alt);
 }
