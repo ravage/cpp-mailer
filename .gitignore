@@ -10,3 +10,4 @@ libmailer.so
 mailer.so
 *.dylib
 test_mailer
+*.a

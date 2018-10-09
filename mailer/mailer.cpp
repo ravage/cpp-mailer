@@ -4,7 +4,7 @@
 #include <sstream>
 #include <random>
 
-Mailer& Mailer::setServer(const std::string value) {
+Mailer& Mailer::setServer(const std::string& value) {
     server = value;
     return *this;
 }
@@ -14,32 +14,32 @@ Mailer& Mailer::setPort(int value) {
     return *this;
 }
 
-Mailer& Mailer::setUsername(const std::string value) {
+Mailer& Mailer::setUsername(const std::string& value) {
     username = value;
     return *this;
 }
 
-Mailer& Mailer::setPassword(const std::string value) {
+Mailer& Mailer::setPassword(const std::string& value) {
     password = value;
     return *this;
 }
 
-Mailer& Mailer::setFrom(const std::string value) {
+Mailer& Mailer::setFrom(const std::string& value) {
     from = value;
     return *this;
 }
 
-Mailer& Mailer::setTo(const std::set<std::string> value) {
+Mailer& Mailer::setTo(const std::set<std::string>& value) {
     to = value;
     return *this;
 }
 
-Mailer& Mailer::setCc(const std::set<std::string> value) {
+Mailer& Mailer::setCc(const std::set<std::string>& value) {
     cc = value;
     return *this;
 }
 
-Mailer& Mailer::setBcc(const std::set<std::string> value) {
+Mailer& Mailer::setBcc(const std::set<std::string>& value) {
     bcc = value;
     return *this;
 }
@@ -54,17 +54,17 @@ Mailer& Mailer::setTls(const bool value) {
     return *this;
 }
 
-Mailer& Mailer::setBody(const std::string value) {
+Mailer& Mailer::setBody(const std::string& value) {
     body = value;
     return *this;
 }
 
-Mailer& Mailer::setSubject(const std::string value) {
+Mailer& Mailer::setSubject(const std::string& value) {
     subject = value;
     return *this;
 }
 
-std::string Mailer::dateHeader(std::string date) {
+std::string Mailer::dateHeader(const std::string& date) {
     std::stringstream result;
     result << "Date: " << date;
     return result.str();
@@ -98,7 +98,7 @@ std::string Mailer::ccHeader() {
     return result.str();
 }
 
-std::string Mailer::messageIdHeader(long random, std::string domain) {
+std::string Mailer::messageIdHeader(long random, const std::string& domain) {
     std::stringstream result;
     result << "Message-ID: <" << std::hex << random << domain << ">";
     return result.str();

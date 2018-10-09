@@ -31,11 +31,11 @@ class Mailer {
     curl_mime *alt{nullptr};
     curl_mimepart *part{nullptr};
 
-    std::string dateHeader(std::string);
+    std::string dateHeader(const std::string&);
     std::string toHeader();
     std::string fromHeader();
     std::string ccHeader();
-    std::string messageIdHeader(long, std::string);
+    std::string messageIdHeader(long, const std::string&);
     std::string subjectHeader();
     std::string getDomain();
     void setOptions();
@@ -45,18 +45,18 @@ class Mailer {
 
     public:
 
-    Mailer& setServer(const std::string);
+    Mailer& setServer(const std::string&);
     Mailer& setPort(const int);
-    Mailer& setUsername(const std::string);
-    Mailer& setPassword(const std::string);
-    Mailer& setFrom(const std::string);
-    Mailer& setTo(const std::set<std::string>);
-    Mailer& setCc(const std::set<std::string>);
-    Mailer& setBcc(const std::set<std::string>);
+    Mailer& setUsername(const std::string&);
+    Mailer& setPassword(const std::string&);
+    Mailer& setFrom(const std::string&);
+    Mailer& setTo(const std::set<std::string>&);
+    Mailer& setCc(const std::set<std::string>&);
+    Mailer& setBcc(const std::set<std::string>&);
     Mailer& setVerbose(const bool value = true);
     Mailer& setTls(const bool value = true);
-    Mailer& setBody(const std::string);
-    Mailer& setSubject(const std::string);
+    Mailer& setBody(const std::string&);
+    Mailer& setSubject(const std::string&);
     void deliver();
 };
 
